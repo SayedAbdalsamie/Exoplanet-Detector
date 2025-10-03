@@ -3,16 +3,49 @@
 An end-to-end web app to analyze stellar light curves and detect potential exoplanets using AI. The project includes a Flask backend for inference and a static frontend for uploading data and visualizing results.
 
 ### Demo
-
-- Image preview:
-
-  ![App Icon](frontend/favicon.svg)
-
 - Video walkthrough:
 
-  Add your demo video to `demo/` (e.g., `demo/demo.mp4`) and link it here:
+  
 
-  `[View Demo Video](demo/demo.mp4)`
+https://github.com/user-attachments/assets/7020862e-ef4b-4502-8fa7-5d0053d83c19
+
+
+
+- Image preview:
+homepage
+
+
+
+<img width="1913" height="925" alt="image" src="https://github.com/user-attachments/assets/33021fcd-c9a6-492f-9f7e-99ef1237e175" />
+
+<img width="1905" height="924" alt="image" src="https://github.com/user-attachments/assets/2c213805-2278-45ee-824e-3110e3b72b03" />
+
+
+
+upload page 
+
+<img width="1909" height="921" alt="image" src="https://github.com/user-attachments/assets/f4d9a102-9c84-4675-adb6-5dc78aa1a8c5" />
+<img width="1911" height="921" alt="image" src="https://github.com/user-attachments/assets/9f9fe03b-44fd-40fc-8a4e-db4555cbfde9" />
+
+<img width="1908" height="921" alt="image" src="https://github.com/user-attachments/assets/9b8544a6-0428-451a-a202-d57b61df7e43" />
+
+result Page
+
+<img width="1907" height="928" alt="image" src="https://github.com/user-attachments/assets/87cd7850-16e7-4d3d-b8a2-9ee2bf30aa65" />
+
+<img width="1907" height="927" alt="image" src="https://github.com/user-attachments/assets/3397b037-f603-41fa-84ef-564ddba3872c" />
+
+<img width="1918" height="914" alt="image" src="https://github.com/user-attachments/assets/429a5143-68af-4197-bc3e-65c6f9f0c4fb" />
+
+
+
+
+
+
+
+
+
+  
 
 ### Features
 
@@ -98,20 +131,10 @@ Base URL: `http://localhost:5000`
 
 ### Datasets
 
-The repository includes several CSV files (e.g., `k2.csv`, `koi.csv`, `toi.csv`) for experimentation. You can also bring your own data with time and flux columns.
 
-### Demo Assets
+The repository includes several CSV files (e.g., `k2.csv`, `koi.csv`, `toi.csv`) for experimentation. we used this data from Nasa Resources.
 
-- Place screenshots in `demo/images/` and videos in `demo/`.
-- Example image embeds:
 
-  `![Upload Page](demo/images/upload.png)`
-
-  `![Results Page](demo/images/results.png)`
-
-- Example video link:
-
-  `[Watch the walkthrough](demo/demo.mp4)`
 
 ### Acknowledgements
 
