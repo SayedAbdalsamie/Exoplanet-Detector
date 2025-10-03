@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload & Predict | Exoplanet Detector</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <canvas id="starfield"></canvas>
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                        <path
+                            d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                    </svg>
+                </div>
+                <span class="logo-text">Exoplanet Detector</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="upload.html" class="nav-link active">Upload & Predict</a>
+                <a href="results.html" class="nav-link">Results</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="upload-section">
+        <div class="container">
+            <div class="upload-content fade-in">
+                <div class="section-header">
+                    <h1>Upload <span class="gradient-text">Stellar Data</span></h1>
+                    <p>Upload your CSV or FITS file, or choose from our sample datasets</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Data Upload</h2>
+                        <p class="card-description">Select a file or choose a sample dataset to analyze</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="upload-zone" id="uploadZone">
+                            <input type="file" id="fileInput" accept=".csv,.fits" hidden>
+                            <label for="fileInput" class="upload-label">
+                                <div class="upload-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="17 8 12 3 7 8" />
+                                        <line x1="12" x2="12" y1="3" y2="15" />
+                                    </svg>
+                                </div>
+                                <p class="upload-text" id="uploadText">Drop your file here or click to browse</p>
+                                <p class="upload-subtext">Supports CSV and FITS files</p>
+                            </label>
+                        </div>
+
+                        <div class="divider">
+                            <span>Or</span>
+                        </div>
+
+                        <div class="dataset-selection">
+                            <h3 class="dataset-title">Choose Sample Dataset</h3>
+                            <div class="dataset-cards-grid">
+                                <div class="dataset-preview-card" data-dataset="kepler-90">
+                                    <div class="dataset-preview-header">
+                                        <div class="dataset-preview-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10" />
+                                                <circle cx="12" cy="12" r="6" />
+                                                <circle cx="12" cy="12" r="2" />
+                                            </svg>
+                                        </div>
+                                        <div class="dataset-preview-info">
+                                            <h4>Kepler-90</h4>
+                                            <p>8-planet system</p>
+                                        </div>
+                                    </div>
+                                    <canvas class="dataset-preview-chart" id="chart-kepler-90" width="280"
+                                        height="100"></canvas>
+                                    <div class="dataset-preview-stats">
+                                        <div class="stat-item">
+                                            <span class="stat-label">Planets</span>
+                                            <span class="stat-value">8</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Confidence</span>
+                                            <span class="stat-value">98%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dataset-preview-card" data-dataset="tess-1">
+                                    <div class="dataset-preview-header">
+                                        <div class="dataset-preview-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M12 2v20M2 12h20" />
+                                                <circle cx="12" cy="12" r="4" />
+                                            </svg>
+                                        </div>
+                                        <div class="dataset-preview-info">
+                                            <h4>TESS-1</h4>
+                                            <p>Hot Jupiter candidate</p>
+                                        </div>
+                                    </div>
+                                    <canvas class="dataset-preview-chart" id="chart-tess-1" width="280"
+                                        height="100"></canvas>
+                                    <div class="dataset-preview-stats">
+                                        <div class="stat-item">
+                                            <span class="stat-label">Type</span>
+                                            <span class="stat-value">Gas Giant</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Confidence</span>
+                                            <span class="stat-value">92%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dataset-preview-card" data-dataset="k2-18">
+                                    <div class="dataset-preview-header">
+                                        <div class="dataset-preview-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10" />
+                                                <path
+                                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                            </svg>
+                                        </div>
+                                        <div class="dataset-preview-info">
+                                            <h4>K2-18</h4>
+                                            <p>Super-Earth in habitable zone</p>
+                                        </div>
+                                    </div>
+                                    <canvas class="dataset-preview-chart" id="chart-k2-18" width="280"
+                                        height="100"></canvas>
+                                    <div class="dataset-preview-stats">
+                                        <div class="stat-item">
+                                            <span class="stat-label">Type</span>
+                                            <span class="stat-value">Super-Earth</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Confidence</span>
+                                            <span class="stat-value">95%</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dataset-preview-card" data-dataset="trappist-1">
+                                    <div class="dataset-preview-header">
+                                        <div class="dataset-preview-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="3" />
+                                                <circle cx="12" cy="12" r="7" />
+                                                <circle cx="12" cy="12" r="10" />
+                                            </svg>
+                                        </div>
+                                        <div class="dataset-preview-info">
+                                            <h4>TRAPPIST-1</h4>
+                                            <p>7 Earth-sized planets</p>
+                                        </div>
+                                    </div>
+                                    <canvas class="dataset-preview-chart" id="chart-trappist-1" width="280"
+                                        height="100"></canvas>
+                                    <div class="dataset-preview-stats">
+                                        <div class="stat-item">
+                                            <span class="stat-label">Planets</span>
+                                            <span class="stat-value">7</span>
+                                        </div>
+                                        <div class="stat-item">
+                                            <span class="stat-label">Confidence</span>
+                                            <span class="stat-value">99%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="analyzeBtn" class="btn btn-primary btn-full" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" x2="12" y1="3" y2="15" />
+                            </svg>
+                            Analyze with AI
+                        </button>
+
+                        <div id="loadingAnimation" class="loading-animation" style="display: none;">
+                            <div class="loading-pulse"></div>
+                            <p>Processing stellar light curves and detecting transit signals...</p>
+                        </div>
+
+                        <div class="model-links" style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+                            <a href="../models/best_model_meta.json" class="btn btn-secondary" target="_blank" rel="noopener">Kepler Meta</a>
+                            <a href="../models/best_model.joblib" class="btn btn-secondary" target="_blank" rel="noopener">Kepler Best Model</a>
+                            <a href="../models_k2/best_model_meta.json" class="btn btn-secondary" target="_blank" rel="noopener">K2 Meta</a>
+                            <a href="../models_k2/best_model.joblib" class="btn btn-secondary" target="_blank" rel="noopener">K2 Best Model</a>
+                            <a href="../models_tess/best_model_meta.json" class="btn btn-secondary" target="_blank" rel="noopener">TESS Meta</a>
+                            <a href="../models_tess/best_model.joblib" class="btn btn-secondary" target="_blank" rel="noopener">TESS Best Model</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Supported Formats</h3>
+                        <ul>
+                            <li>CSV files with time and flux columns</li>
+                            <li>FITS files from Kepler/TESS missions</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <h3>What We Detect</h3>
+                        <ul>
+                            <li>Transit signals in light curves</li>
+                            <li>Exoplanet candidates with confidence scores</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Exoplanet Detector. Built for NASA Space Apps Challenge.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="upload.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Detector | NASA Space Apps Challenge 2025</title>
+    <meta name="description"
+        content="Upload stellar data and let AI detect potential exoplanets. Built for NASA Space Apps Challenge 2025.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <canvas id="starfield"></canvas>
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                        <path
+                            d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                        <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                        <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                    </svg>
+                </div>
+                <span class="logo-text">Exoplanet Detector</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="upload.html" class="nav-link">Upload & Predict</a>
+                <a href="results.html" class="nav-link">Results</a>
+                <a href="about.html" class="nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <div class="badge">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                        <path d="M5 3v4" />
+                        <path d="M19 17v4" />
+                        <path d="M3 5h4" />
+                        <path d="M17 19h4" />
+                    </svg>
+                    NASA Space Apps Challenge 2025
+                </div>
+
+                <h1 class="hero-title">
+                    <span class="gradient-text">Hunting Exoplanets</span>
+                    <br>
+                    <span>with AI</span>
+                </h1>
+
+                <p class="hero-description">
+                    Upload stellar data and let AI detect potential exoplanets.<br>
+                    Powered by machine learning and NASA datasets.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="upload.html" class="btn btn-primary">
+                        Try Now
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14" />
+                            <path d="m12 5 7 7-7 7" />
+                        </svg>
+                    </a>
+                    <a href="about.html" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+
+            <div class="feature-grid fade-in-delay">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v8" />
+                            <path d="m4.93 10.93 1.41 1.41" />
+                            <path d="M2 18h2" />
+                            <path d="M20 18h2" />
+                            <path d="m19.07 10.93-1.41 1.41" />
+                            <path d="M22 22H2" />
+                            <path d="m8 6 4-4 4 4" />
+                            <path d="M16 18a4 4 0 0 0-8 0" />
+                        </svg>
+                    </div>
+                    <h3>NASA Datasets</h3>
+                    <p>Analyze data from Kepler, TESS, and K2 missions to discover new worlds.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 1 0 0 0 12 18Z" />
+                            <path d="M9 13a4.5 4.5 0 0 0 3-4" />
+                            <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" />
+                            <path d="M3.477 10.896a4 4 0 0 1 .585-.396" />
+                            <path d="M6 18a4 4 0 0 1-1.967-.516" />
+                            <path d="M12 13h4" />
+                            <path d="M12 18h6a2 2 0 0 1 2 2v1" />
+                            <path d="M12 8h8" />
+                            <path d="M16 8V5a2 2 0 0 1 2-2" />
+                            <circle cx="16" cy="13" r=".5" />
+                            <circle cx="18" cy="3" r=".5" />
+                            <circle cx="20" cy="21" r=".5" />
+                            <circle cx="20" cy="8" r=".5" />
+                        </svg>
+                    </div>
+                    <h3>AI Detection</h3>
+                    <p>Advanced machine learning models trained on thousands of confirmed exoplanets.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                            <path d="M5 3v4" />
+                            <path d="M19 17v4" />
+                            <path d="M3 5h4" />
+                            <path d="M17 19h4" />
+                        </svg>
+                    </div>
+                    <h3>Real-time Analysis</h3>
+                    <p>Get instant predictions with detailed light curve visualizations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Exoplanet Detector. Built for NASA Space Apps Challenge.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
