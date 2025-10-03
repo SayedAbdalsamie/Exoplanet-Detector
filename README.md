@@ -1,86 +1,122 @@
-## Exoplanet Detector – NASA Space Apps
+## Exoplanet Detector — NASA Space Apps Challenge 2025
 
-AI-powered web app and notebook pipeline for classifying exoplanet candidates from Kepler, K2, and TESS mission data.
+An end-to-end web app to analyze stellar light curves and detect potential exoplanets using AI. The project includes a Flask backend for inference and a static frontend for uploading data and visualizing results.
 
-### Highlights
-- Numeric-only ML models: SGD, RandomForest, HistGradientBoosting, MLP
-- Per-mission training, evaluation, and model persistence
-- Flask backend for light-curve parsing and inference
-- Modern frontend for upload, analysis, visualization, and export
+### Demo
 
-### Quick Start
-1) Backend
-```bash
-pip install -r data/raw/backend/requirements.txt
-python data/raw/backend/app.py
+- Image preview:
+
+  ![App Icon](frontend/favicon.svg)
+
+- Video walkthrough:
+
+  Add your demo video to `demo/` (e.g., `demo/demo.mp4`) and link it here:
+
+  `[View Demo Video](demo/demo.mp4)`
+
+### Features
+
+- Upload CSV or FITS files and run AI-based exoplanet detection
+- Built-in sample dataset option for quick testing
+- Plotly-based light curve visualization and rich UI
+- Simple, CUDA-aware PyTorch inference with a safe heuristic fallback model
+
+### Project Structure
+
 ```
-2) Frontend
-- Open `data/raw/frontend/index.html` in a browser (or serve statically).
+project/
+  backend/
+    app.py              # Flask app with /api/predict endpoint and static serving
+    inference.py        # Parsing (CSV/FITS) and model inference utilities
+    requirements.txt    # Backend Python dependencies
+  frontend/
+    index.html          # Landing page
+    upload.html         # Upload and analyze page
+    results.html        # Results and visualizations
+    script.js, upload.js, results.js, styles.css
+    favicon.svg
+  exoplanet_models_numeric_only.ipynb
+  *.csv (Kepler/K2/TESS dataset files)
+  README.md
+```
 
-### Notebooks and Data
-- Notebook: `data/raw/exoplanet_models_numeric_only.ipynb`
-- Raw CSVs: `data/raw/koi.csv`, `data/raw/k2.csv`, `data/raw/toi.csv`
-- Cleaned/derived: `data/raw/koi_numeric_only.csv`, `data/raw/kepler_features.csv`
-- Reports and models: `data/raw/models*` directories
+### Getting Started
 
-### Best Models
-- Kepler: `data/raw/models/best_model.joblib`
-- K2: `data/raw/models_k2/best_model.joblib`
-- TESS: `data/raw/models_tess/best_model.joblib`
+#### 1) Backend (Flask)
 
-### Space Images
-Below are included project images used for branding and the tab icon.
+Requirements: Python 3.10+, pip
 
-![App Icon](data/raw/frontend/favicon.svg)
+```bash
+cd backend
+python -m venv .venv
+.venv\\Scripts\\activate
+pip install -r requirements.txt
+python app.py
+```
 
-![Banner](data/raw/ChatGPT%20Image%20Oct%203,%202025,%2004_28_40%20PM.png)
+The server starts at `http://localhost:5000` and also serves the frontend from `../frontend`.
 
-### Space Videos (External)
-- NASA YouTube Channel: https://www.youtube.com/@NASA
-- Exoplanet Exploration (JPL): https://exoplanets.nasa.gov/
-- TESS Mission Overview: https://www.youtube.com/results?search_query=TESS+mission
+Notes:
+- If no Torch model file is found, a lightweight heuristic model runs to avoid errors.
+- FITS support requires `astropy`; ensure it is installed via requirements.
+
+#### 2) Frontend (static)
+
+Open `frontend/index.html` in a browser, or rely on the Flask server which serves it at `/`.
+
+### Usage
+
+1. Open the app (served by Flask) at `http://localhost:5000/`.
+2. Navigate to Upload & Predict.
+3. Either upload a `.csv` or `.fits` file, or choose a sample dataset.
+4. Click “Analyze with AI” to get predictions and see the light curve in Results.
 
 ### API
-- Health: `GET /api/health`
-- Predict: `POST /api/predict` with `file` (CSV/FITS) or `dataset` form field
 
-### License
-Public domain images and videos remain property of their respective owners (e.g., NASA/JPL). Code in this repo under permissive terms by the project authors.
+Base URL: `http://localhost:5000`
 
-# A World Away: Hunting for Exoplanets with AI
+- `GET /api/health`
+  - 200 → `{ "status": "ok" }`
 
-End-to-end ML pipeline to discover exoplanet candidates from side-data (KOI, TOI, K2) and optional NEOSSat/JWST sources. Includes data ingestion, preprocessing, feature engineering, EDA, model training (RF/XGBoost/LightGBM), prediction, evaluation, explainability (SHAP), and report generation.
+- `POST /api/predict`
+  - Form-data fields:
+    - `file`: CSV or FITS file (optional if `dataset` is provided)
+    - `dataset`: sample dataset name string (optional if `file` is provided)
+  - Responses:
+    - 200 →
+      ```json
+      {
+        "probability": 0.87,
+        "label": 1,
+        "time": [ ... 100 values ... ],
+        "flux": [ ... 100 values ... ],
+        "fileName": "your_file.csv"
+      }
+      ```
+    - 400 → `{ "error": "Provide a file or dataset" }` or unsupported file type
+    - 500 → `{ "error": "..." }`
 
-## Quickstart
+### Datasets
 
-```bash
-# (optional) create venv
-python -m venv .venv && .venv\\Scripts\\activate
+The repository includes several CSV files (e.g., `k2.csv`, `koi.csv`, `toi.csv`) for experimentation. You can also bring your own data with time and flux columns.
 
-# install deps
-pip install -r requirements.txt
+### Demo Assets
 
-# run full pipeline
-python pipeline.py all
-```
+- Place screenshots in `demo/images/` and videos in `demo/`.
+- Example image embeds:
 
-Artifacts are saved under `outputs/` and `models/`. Raw and processed data live in `data/raw` and `data/processed`.
+  `![Upload Page](demo/images/upload.png)`
 
-## Commands
+  `![Results Page](demo/images/results.png)`
 
-- `python pipeline.py download` — fetch KOI/TOI/K2 tables from NASA Exoplanet Archive; NEOSSat/JWST are optional stubs
-- `python pipeline.py preprocess` — clean, engineer features, merge datasets
-- `python pipeline.py eda` — generate EDA plots
-- `python pipeline.py train` — train models with CV and hyperparameter search
-- `python pipeline.py predict` — score unknown/candidate rows and rank by probability
-- `python pipeline.py report` — generate markdown report and export predictions CSV
-- `python pipeline.py all` — run everything in sequence
+- Example video link:
 
-## Configuration
+  `[Watch the walkthrough](demo/demo.mp4)`
 
-Edit `configs/config.yaml` to tweak data sources, feature list, and model parameters.
+### Acknowledgements
 
-## Notes
+- Built for NASA Space Apps Challenge 2025
+- Uses NASA Kepler, K2, and TESS datasets
+- PyTorch, Flask, Plotly, and Astropy
 
-- NEOSSat and JWST ingestion are provided as extensible stubs; place CSVs under `data/external/` or set custom URLs in `configs/config.yaml`.
-- This pipeline prioritizes explainability; feature importances and SHAP plots are exported under `outputs/explainability/`.
+
